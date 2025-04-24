@@ -14,7 +14,7 @@ export type Controller = {
             after: any
         },
         parameters: Parameters
-    ) => Promise<{ results: { name: string; folder?: string; modified_at?: number }[]; last?: any }>
+    ) => Promise<{ results: { name: string; folder?: string; modified_at?: string }[]; last?: any }>
     listFolders?: (
         listParameters: {
             model: string

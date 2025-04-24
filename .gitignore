@@ -3,3 +3,4 @@ public/*.css*
 public/*.js*
 .dev.vars*
 .wrangler
+wrangler.json

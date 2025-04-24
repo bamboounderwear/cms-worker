@@ -231,6 +231,10 @@ export type Model = {
     folderAlias?: string
     /** Optional plural alias for the 'folder' identifier */
     folderPluralAlias?: string
+    /** Optional handler for transforming document after retrieval */
+    afterGet?: (value: any) => Promise<any>
+    /** Optional handler for transforming document before update */
+    beforePut?: (value: any) => Promise<any>
 }
 
 const initialParams = Object.fromEntries(new URLSearchParams(window.location.search).entries())

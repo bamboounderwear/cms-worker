@@ -45,7 +45,7 @@ export const documentsController: Controller = {
     async list({ model, folder, prefix, limit, after }, { environment: { DB } }) {
         const prefixQuery = prefix ? queryPrefix(prefix) : undefined
         const { results } = await DB.prepare(
-            `select rowid, folder, name, modified_at from documents where model = ?${folder ? ' and folder = ?' : ''}${
+            `select rowid, name, folder, modified_at from documents where model = ?${folder ? ' and folder = ?' : ''}${
                 prefixQuery ? ` and (${prefixQuery.query})` : ''
             } and rowid > ? order by name, rowid limit ?`
         )
@@ -62,7 +62,11 @@ export const documentsController: Controller = {
             }>()
 
         return {
-            results,
+            results: results.map(document => ({
+                ...document,
+                rowid: undefined,
+                modified_at: new Date(document.modified_at * 1000).toLocaleDateString(),
+            })),
             last: results.length === limit ? results[results.length - 1]?.rowid?.toString() : undefined,
         }
     },

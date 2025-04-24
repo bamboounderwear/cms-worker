@@ -1,8 +1,39 @@
 import React from 'react'
 import { Model } from './components/app'
-import { FileIcon, ProductsIcon } from './components/icons'
+import { FileIcon, ModelIcon, ProductsIcon } from './components/icons'
 
 export const models: Model[] = [
+    {
+        name: 'models',
+        singularName: 'model',
+        icon: <ModelIcon />,
+        schema: {
+            type: 'object',
+            properties: {
+                singularName: { type: 'string', title: 'singular name', description: 'singular model name (example: "product")' },
+                fields: {
+                    type: 'array',
+                    itemKey: value => value?.title ?? value?.key,
+                    itemDescription: value => value?.description,
+                    items: {
+                        anyOf: [
+                            {
+                                title: 'text field',
+                                type: 'object',
+                                properties: {
+                                    key: { type: 'string' },
+                                    title: { type: 'string', description: 'optional display title' },
+                                    description: { type: 'string', description: 'optional field description' },
+                                    format: { type: 'string', enum: ['date-time', 'markdown'] },
+                                    default: { type: 'string', description: 'optional default value' },
+                                },
+                            },
+                        ],
+                    },
+                },
+            },
+        },
+    },
     {
         name: 'pages',
         singularName: 'page',

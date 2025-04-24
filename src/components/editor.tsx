@@ -110,15 +110,15 @@ export default function Editor({
         }
     }, [documentUpdated, setName, setFolder])
 
-    const fetchDocument = useCallback(() => {
+    const fetchDocument = useCallback(async () => {
         if (!name || documentModel?.allowGet === false) return
         setLoading(true)
         try {
-            client.getDocument(model, folder, name).then(value => {
-                setDocument(value)
-                setDocumentUpdated(false)
-                setLoading(false)
-            })
+            let value = await client.getDocument(model, folder, name)
+            if (documentModel?.afterGet) value = await documentModel.afterGet(value)
+            setDocument(value)
+            setDocumentUpdated(false)
+            setLoading(false)
         } catch (e) {
             console.error(e)
             setName(undefined)
@@ -141,22 +141,26 @@ export default function Editor({
                 if (!confirm(`${singularCapitalName} already exists, overwrite?`)) return setLoading(false)
             }
 
+            let value =
+                document instanceof File
+                    ? document
+                    : {
+                          ...document,
+                          _modified_at: undefined,
+                          _model: model,
+                          _folder: newFolder,
+                          _name: newName,
+                      }
+
+            if (documentModel?.beforePut) value = await documentModel.beforePut(value)
+
             await client.upsertDocument({
                 model,
                 folder: name ? folder : newFolder,
                 newFolder,
                 name: name || newName,
                 newName,
-                value:
-                    document instanceof File
-                        ? document
-                        : {
-                              ...document,
-                              _modified_at: undefined,
-                              _model: model,
-                              _folder: newFolder,
-                              _name: newName,
-                          },
+                value,
             })
 
             if (!folders.includes(newFolder)) fetchFolders()
@@ -272,7 +276,7 @@ export default function Editor({
                                         id="save-document"
                                         disabled={loading || DEMO}
                                         onClick={saveDocument}
-                                        className="action-button"
+                                        className="primary action-button"
                                         title={`Save ${documentModel?.singularName}`}
                                     >
                                         <span>save</span>
