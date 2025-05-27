@@ -2,24 +2,25 @@
     "name": "cms-worker",
     "main": "src/worker.ts",
     "compatibility_date": "2024-10-11",
-    "account_id": "ID",
+    "account_id": "f07bf16614b0421d83f751131e84be31",
     "vars": {
         "DEMO": false
     },
     "assets": {
-        "directory": "./public"
+        "directory": "./public",
+        "binding": "ASSETS"
     },
     "d1_databases": [
         {
             "binding": "DB",
-            "database_name": "db",
-            "database_id": "DB_ID"
+            "database_name": "cms-worker-db",
+            "database_id": "8302862c-a300-40ae-8dbe-1023f3ed1aae"
         }
     ],
     "r2_buckets": [
         {
             "binding": "FILES",
-            "bucket_name": "BUCKET",
+            "bucket_name": "cms-worker-bucket",
             "preview_bucket_name": "files"
         }
     ]

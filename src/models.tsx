@@ -1,6 +1,5 @@
-import React from 'react'
 import { Model } from './components/app'
-import { FileIcon, ProductsIcon } from './components/icons'
+import { FileIcon, ProductsIcon, UserIcon } from './components/icons'
 
 export const models: Model[] = [
     {
@@ -12,15 +11,14 @@ export const models: Model[] = [
             properties: {
                 title: { type: 'string', description: 'short, SEO-friendly page title' },
                 description: { type: 'string' },
+                attachment: { type: 'string', format: 'uri' },
                 content: { type: 'string', format: 'markdown' },
             },
         },
         previewURL: () => {
-            return 'test'
+            return '/test'
         },
         nameAlias: 'path',
-        folderAlias: 'status',
-        folderPluralAlias: 'statuses',
     },
     {
         name: 'products',
@@ -35,8 +33,6 @@ export const models: Model[] = [
                 wasPrice: { type: 'number', title: 'original price', description: 'optional' },
                 variants: {
                     type: 'array',
-                    itemKey: value => value?.sku,
-                    itemDescription: value => value?.options?.map(option => `${option?.name}: ${option?.value}`)?.join(', '),
                     items: {
                         title: 'variant',
                         type: 'object',
@@ -63,9 +59,17 @@ export const models: Model[] = [
             },
         },
         previewURL: () => {
-            return 'test'
+            return '/test'
         },
-        folderAlias: 'category',
-        folderPluralAlias: 'categories',
+    },
+    {
+        name: 'users',
+        singularName: 'user',
+        icon: <UserIcon />,
+        schema: { type: 'object', properties: {}, description: 'Add user by email.' },
+        allowGet: false,
+        allowRename: false,
+        allowUpdate: false,
+        nameAlias: 'email',
     },
 ]
