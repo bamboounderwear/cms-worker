@@ -21,8 +21,10 @@ export const models: Model[] = [
                 published_at: { type: 'string', format: 'date-time' },
             },
         },
-        previewURL: () => {
-            return '/test'
+        previewURL: document => {
+            const name = document?.name ?? ''
+            if (name === 'home' || name === '') return '/'
+            return `/${name}`
         },
         nameAlias: 'path',
     },
