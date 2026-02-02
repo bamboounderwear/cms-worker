@@ -27,6 +27,23 @@ create table documents (
     primary key (model, name)
 );
 
+insert into documents (model, name, value, modified_at, modified_by)
+values
+    (
+        'pages',
+        'home',
+        '{"title":"Home","description":"Welcome to the public site.","content":"# Welcome\\nThis is your starter home page.\\n\\n- Edit this page in the CMS.\\n- Publish to update the public site.","status":"published"}',
+        1700000000,
+        'seed'
+    ),
+    (
+        'pages',
+        'about',
+        '{"title":"About","description":"Learn more about this site.","content":"# About\\nShare your story here and keep it up to date in the CMS.","status":"published"}',
+        1700000000,
+        'seed'
+    );
+
 create table cache (
     key text primary key,
     value text
