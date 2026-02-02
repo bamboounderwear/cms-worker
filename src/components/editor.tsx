@@ -5,7 +5,7 @@ import { Model } from './app'
 import { client } from './app'
 import { LeftArrow, ServerIcon, DocumentCheckIcon, TrashIcon, FileIcon, DuplicateIcon, LinkIcon } from './icons'
 import EditorFields from './editor-fields'
-import { vars as environment } from '../../wrangler.json'
+import { vars as environment } from '../../wrangler.jsonc'
 
 const DEMO = environment.DEMO
 
