@@ -20,7 +20,7 @@
         "react-dom": "^18.3.1",
         "tailwindcss": "^3.4.14",
         "tschema": "^3.2.0",
-        "wrangler": "^4.16.1"
+        "wrangler": "4.16.1"
     },
     "scripts": {
         "start": "run-p watch-admin watch-site watch-style dev",
@@ -30,8 +30,8 @@
         "build-admin": "esbuild src/client.tsx --bundle --outdir=public --jsx=automatic --minify --sourcemap=external --loader:.jsonc=json",
         "build-site": "esbuild src/site.tsx --bundle --outfile=public/site.js --jsx=automatic --minify --sourcemap=external --loader:.jsonc=json",
         "watch-style": "npx tailwindcss -i ./src/style.css -o ./public/style.css --watch --minify",
-        "dev": "npx wrangler dev --port 3000",
-        "migrate": "npx wrangler d1 execute DB --local --file=./schema.sql",
-        "deploy": "npx wrangler deploy --minify"
+        "dev": "npx wrangler dev --port 3000 --config wrangler.jsonc",
+        "migrate": "npx wrangler d1 execute DB --local --file=./schema.sql --config wrangler.jsonc",
+        "deploy": "npx wrangler deploy --minify --config wrangler.jsonc"
     }
 }
