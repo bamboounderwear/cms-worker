@@ -6,6 +6,7 @@ import addVerificationRoutes from './routes/verification'
 import addSessionsRoutes from './routes/sessions'
 import { addDocumentsRoutes } from './routes/documents'
 import addFilesRoutes from './routes/files'
+import { addPublicRoutes } from './routes/public'
 import { addSessionAuthentication, addTokenAuthentication } from './middleware/authentication'
 import { addBCAuthentication, addBCRoutes } from './plugins/big-commerce/server'
 
@@ -92,6 +93,7 @@ addVerificationRoutes()
 addSessionsRoutes()
 addFilesRoutes()
 addDocumentsRoutes()
+addPublicRoutes()
 
 export default {
     async fetch(request: Request, environment: Environment) {

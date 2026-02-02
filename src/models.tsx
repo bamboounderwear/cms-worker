@@ -13,6 +13,12 @@ export const models: Model[] = [
                 description: { type: 'string' },
                 attachment: { type: 'string', format: 'uri' },
                 content: { type: 'string', format: 'markdown' },
+                status: {
+                    type: 'string',
+                    enum: ['draft', 'published'],
+                    default: 'draft',
+                },
+                published_at: { type: 'string', format: 'date-time' },
             },
         },
         previewURL: () => {
