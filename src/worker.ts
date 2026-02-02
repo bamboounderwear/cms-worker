@@ -161,12 +161,19 @@ export default {
                 return new Response(undefined, { status: 500 })
             }
 
-        // Fallback browser requests to web client for client routing
-        if (headers?.accept?.includes('text/html')) {
-            url.pathname = '/'
+        const isAdminPath = url.pathname === '/admin' || url.pathname.startsWith('/admin/')
+
+        if (isAdminPath) {
+            const assetPath = url.pathname.replace(/^\/admin/, '') || '/'
+            url.pathname = headers?.accept?.includes('text/html') ? '/index.html' : assetPath
             return environment.ASSETS.fetch(url)
         }
 
-        return responses.notFound
+        if (headers?.accept?.includes('text/html')) {
+            url.pathname = '/site/index.html'
+            return environment.ASSETS.fetch(url)
+        }
+
+        return environment.ASSETS.fetch(url)
     },
 }
