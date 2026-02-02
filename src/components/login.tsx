@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react'
 import { client } from './app'
-import { vars as environment } from '../../wrangler.json'
+import { vars as environment } from '../../wrangler.jsonc'
 
 const DEMO = environment?.DEMO
 

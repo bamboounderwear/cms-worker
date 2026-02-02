@@ -63,7 +63,7 @@ Worker CMS provides a comprehensive suite of tools for content management, all r
     # or
     # npx wrangler d1 migrations apply YOUR_DATABASE_NAME --remote # For production
     ```
-    *Ensure your `wrangler.toml` has the correct D1 binding and database ID.*
+    *Ensure your `wrangler.jsonc` has the correct D1 binding and database ID.*
 
 4.  **Local Development**:
     Start the development server (usually on `http://localhost:3000`):
@@ -74,9 +74,9 @@ Worker CMS provides a comprehensive suite of tools for content management, all r
 
 ## 🛠️ Configuration & Development
 
-### Core Configuration (`wrangler.toml`)
+### Core Configuration (`wrangler.jsonc`)
 
-Your `wrangler.toml` file is crucial for binding Cloudflare services:
+Your `wrangler.jsonc` file is crucial for binding Cloudflare services:
 
 *   **D1 Database**: For storing content and user data.
 *   **R2 Bucket**: For file storage.
@@ -133,7 +133,7 @@ Plugins are the primary way to extend Worker CMS. A typical plugin might have:
 
 ## ☁️ Deployment
 
-1.  **Configure `wrangler.toml`**:
+1.  **Configure `wrangler.jsonc`**:
     Ensure all necessary bindings (D1, R2) and environment variables (see "Core Configuration") are set for your production environment.
 
 2.  **Deploy to Cloudflare**:
