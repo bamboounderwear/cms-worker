@@ -171,6 +171,15 @@ export default {
             return environment.ASSETS.fetch(url)
         }
 
+        if (url.pathname === '/index.html') {
+            url.pathname = '/site/index.html'
+            return environment.ASSETS.fetch(url)
+        }
+
+        if (url.pathname === '/client.js' || url.pathname === '/client.css') {
+            return responses.notFound
+        }
+
         if (headers?.accept?.includes('text/html')) {
             url.pathname = '/site/index.html'
             return environment.ASSETS.fetch(url)
